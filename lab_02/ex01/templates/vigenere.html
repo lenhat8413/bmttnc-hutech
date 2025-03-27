@@ -5,14 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vigenère Cipher</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        .error-alert {
+            display: none;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
     <h3 class="text-center mt-4">Vigenère Cipher</h3>
+    
+    <!-- Error Alert -->
+    <div class="alert alert-danger error-alert" id="errorAlert">
+        Error: Only alphabetic characters (A-Z, a-z) are allowed. Numbers and special characters are not permitted!
+    </div>
 
     <h4 class="mt-4">Encryption</h4>
-    <form id="encrypt-form">
+    <form id="encrypt-form" onsubmit="return validateInput('plain_text', 'key', 'encrypt')">
         <div class="mb-3">
             <label class="form-label">Plain text:</label>
             <input type="text" class="form-control" id="plain_text" placeholder="Enter text" required/>
@@ -25,7 +36,7 @@
     </form>
 
     <h4 class="mt-4">Decryption</h4>
-    <form id="decrypt-form">
+    <form id="decrypt-form" onsubmit="return validateInput('cipher_text', 'key_decrypt', 'decrypt')">
         <div class="mb-3">
             <label class="form-label">Cipher text:</label>
             <input type="text" class="form-control" id="cipher_text" placeholder="Enter cipher text" required/>
@@ -39,13 +50,46 @@
 </div>
 
 <script>
-    // Gửi dữ liệu mã hóa
-    document.getElementById('encrypt-form').onsubmit = function(e) {
-        e.preventDefault();
+    // Input validation function
+    function validateInput(textFieldId, keyFieldId, action) {
+        const textInput = document.getElementById(textFieldId).value;
+        const keyInput = document.getElementById(keyFieldId).value;
+        const errorAlert = document.getElementById('errorAlert');
+        
+        // Regular expression to allow only letters
+        const lettersOnly = /^[a-zA-Z]+$/;
+        
+        if (!lettersOnly.test(keyInput)) {
+            errorAlert.style.display = 'block';
+            document.getElementById(textFieldId).focus();
+            return false;
+        }
+        
+        if (!lettersOnly.test(keyInput)) {
+            errorAlert.style.display = 'block';
+            document.getElementById(keyFieldId).focus();
+            return false;
+        }
+        
+        errorAlert.style.display = 'none';
+        
+        // Proceed with encryption/decryption
+        if (action === 'encrypt') {
+            encryptData();
+        } else {
+            decryptData();
+        }
+        
+        return false; // Prevent default form submission
+    }
+
+    // Encryption function
+    function encryptData() {
         const data = {
-            plain_text: document.getElementById('plain_text').value,
-            key: document.getElementById('key').value
+            plain_text: document.getElementById('plain_text').value.toUpperCase(),
+            key: document.getElementById('key').value.toUpperCase()
         };
+        
         fetch('/vigenere/encrypt', {
             method: 'POST',
             headers: {
@@ -56,16 +100,19 @@
         .then(response => response.json())
         .then(data => {
             alert('Encrypted Text: ' + data.encrypted_text);
+        })
+        .catch(error => {
+            alert('Error during encryption: ' + error.message);
         });
-    };
+    }
 
-    // Gửi dữ liệu giải mã
-    document.getElementById('decrypt-form').onsubmit = function(e) {
-        e.preventDefault();
+    // Decryption function
+    function decryptData() {
         const data = {
-            cipher_text: document.getElementById('cipher_text').value,
-            key: document.getElementById('key_decrypt').value
+            cipher_text: document.getElementById('cipher_text').value.toUpperCase(),
+            key: document.getElementById('key_decrypt').value.toUpperCase()
         };
+        
         fetch('/vigenere/decrypt', {
             method: 'POST',
             headers: {
@@ -76,8 +123,11 @@
         .then(response => response.json())
         .then(data => {
             alert('Decrypted Text: ' + data.decrypted_text);
+        })
+        .catch(error => {
+            alert('Error during decryption: ' + error.message);
         });
-    };
+    }
 </script>
 
 </body>
