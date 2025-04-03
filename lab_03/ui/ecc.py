@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './ui/caesar.ui'
+# Form implementation generated from reading ui file './ui/ecc.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -19,7 +19,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(180, 20, 281, 51))
+        self.label.setGeometry(QtCore.QRect(180, 10, 221, 51))
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -27,29 +27,26 @@ class Ui_MainWindow(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(40, 100, 61, 21))
+        self.label_2.setGeometry(QtCore.QRect(40, 100, 91, 21))
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(50, 220, 55, 16))
+        self.label_3.setGeometry(QtCore.QRect(40, 290, 91, 21))
         self.label_3.setObjectName("label_3")
-        self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(40, 350, 91, 31))
-        self.label_4.setObjectName("label_4")
         self.txtplaintext = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.txtplaintext.setGeometry(QtCore.QRect(120, 100, 531, 91))
+        self.txtplaintext.setGeometry(QtCore.QRect(130, 100, 561, 131))
         self.txtplaintext.setObjectName("txtplaintext")
-        self.txtkey = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.txtkey.setGeometry(QtCore.QRect(120, 220, 531, 51))
-        self.txtkey.setObjectName("txtkey")
         self.txtcptext = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.txtcptext.setGeometry(QtCore.QRect(120, 340, 531, 91))
+        self.txtcptext.setGeometry(QtCore.QRect(130, 280, 561, 131))
         self.txtcptext.setObjectName("txtcptext")
-        self.btnen = QtWidgets.QPushButton(self.centralwidget)
-        self.btnen.setGeometry(QtCore.QRect(120, 470, 93, 28))
-        self.btnen.setObjectName("btnen")
-        self.btnde = QtWidgets.QPushButton(self.centralwidget)
-        self.btnde.setGeometry(QtCore.QRect(460, 470, 93, 28))
-        self.btnde.setObjectName("btnde")
+        self.btnsign = QtWidgets.QPushButton(self.centralwidget)
+        self.btnsign.setGeometry(QtCore.QRect(150, 440, 93, 28))
+        self.btnsign.setObjectName("btnsign")
+        self.btnverify = QtWidgets.QPushButton(self.centralwidget)
+        self.btnverify.setGeometry(QtCore.QRect(500, 440, 93, 28))
+        self.btnverify.setObjectName("btnverify")
+        self.btngenerate = QtWidgets.QPushButton(self.centralwidget)
+        self.btngenerate.setGeometry(QtCore.QRect(450, 20, 93, 28))
+        self.btngenerate.setObjectName("btngenerate")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
@@ -65,12 +62,12 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "CAESAR CIPHER"))
-        self.label_2.setText(_translate("MainWindow", "Plain Text"))
-        self.label_3.setText(_translate("MainWindow", "Key"))
-        self.label_4.setText(_translate("MainWindow", "Cipher Text"))
-        self.btnen.setText(_translate("MainWindow", "Encrypt"))
-        self.btnde.setText(_translate("MainWindow", "Decrypt"))
+        self.label.setText(_translate("MainWindow", "ECC CIPHER"))
+        self.label_2.setText(_translate("MainWindow", "Information:"))
+        self.label_3.setText(_translate("MainWindow", "Signature:"))
+        self.btnsign.setText(_translate("MainWindow", "Sign"))
+        self.btnverify.setText(_translate("MainWindow", "Verify"))
+        self.btngenerate.setText(_translate("MainWindow", "Generate keys"))
 
 
 if __name__ == "__main__":
